@@ -1,0 +1,12 @@
+Inicio ProcesoDosEnDos
+	
+	var dosEnDos
+	var numero
+
+	Escribir "Ingrese la cantidad mayor para el conteo"
+	Leer (numero)
+	
+	Desde var i = 0; hasta i <= numero; incremento +2
+		Escribir ""+i
+	finDesde
+Fin
