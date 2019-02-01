@@ -1,0 +1,25 @@
+Inicio ProcesoVotacion
+	var edad
+	var sexo
+	
+	Escribir "Ingrese sexo de la persona: 'm' para masculino y 'f'para femenino"
+	Leer(sexo)
+	EScribir "Ingrese la edad de la persona"
+	Leer(edad)
+
+	si(edad > 17) entonces
+		Escribir "Puede votar"
+	sino
+		Escribir "No puede votar"
+	finsi
+
+	si(sexo == 'm')
+		Escribir "Es hombre"
+	sino si (sexo == 'f')
+		Escrbir "Es mujer"
+	sino	
+		Escribir "No es persona"
+	finsi
+Fin
+
+
