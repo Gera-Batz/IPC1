@@ -1,0 +1,12 @@
+Inicio AreaTriangulos
+	var base
+	var altura
+	var area
+	
+	Escribir "Ingrese la base del triangulo"
+	Leer(base)
+	Escribir "Ingrese la altura del triangulo"
+	Leer(altura)
+
+	Escribir "El area del triangulo es: " + (area = 0.5*base*altura)
+Fin  
