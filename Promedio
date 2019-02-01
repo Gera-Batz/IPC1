@@ -1,0 +1,13 @@
+Inicio Promedio
+	var cantidad = 0
+	var total = 0
+
+	Desde var i = 0; hasta i = 9; incremento
+		Escribir "Ingrese un numero"
+		Leer (cantidad)
+		total = total + cantidad
+	finDesde
+	
+	Escribir "La suma total es: "+ total
+	Escribir "El promedio es: " + (total/10)
+Fin
