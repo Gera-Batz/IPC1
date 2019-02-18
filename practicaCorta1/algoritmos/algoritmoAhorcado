@@ -1,0 +1,117 @@
+var opciones	
+Inicio juegoAhorcado
+	si (longitud de args)< 1 entonces
+		Escribir "Bienvenido a la libreria de Juegos"
+		seleccionDeJuegos()
+	sino
+		parametroEnviado(args[0])
+	finSi
+fin
+Inicio Proceso parametroEnviado(String juego)
+	caso(juego)
+		caso "Ahorcado":
+			controlJuegoAhorcado()
+		caso "Basquetball"
+			JuegoBasquetball.controlJuegoBasquetball()
+		caso "Cartas"
+			JuegoCartas.juegoCartas()
+		caso "Hanoi"
+			JuegoHanoi.hanoi()
+	finCaso
+finProceso
+Inicio Proceso ControlJuegoAhorcado()
+	var palabraOculta
+	
+	
+	Escribir "Bienvenido al Juego del Ahorcado"
+	Escribir "Que quieres hacer?"
+	Escribir "1. Jugar"
+	Escribir "2. Instrucciones"
+	Escribir "3. Menu de juegos"
+	Escribir "4. Salir de la app"
+	Leer(opciones)
+
+	caso(opciones)
+		caso 1:
+			Escribir "Escriba la palabra a encontrar"
+			Leer(palabraOculta)			
+			llamar juegoAhorcado(palabraOculta)
+		caso 2:
+			Escribir "La idea es encontrar la palabra indicada al inicio"
+			Escribir "el juego le indicara si es correcta o no, en caso"
+			Escribir "de que sea correcta, la letra sera colocada en su"
+			Escribir "posición, si no es correcta, se ira dibujando a una persona con una"
+			Escribir "soga colocada en el cuello, poco a poco"
+			Escribir "el juego termina hasta el momento en que se descubra"
+			Escribir "la palabra o sea ahorcada la persona. Buena suerte...!!!"
+		caso 3:
+			llamar seleccionDeJuego()
+		caso 4:
+			llamar salirDelJuego()
+	FinCaso
+FinProceso
+
+
+InicioProceso JuegoAhorcado(var palabraEncontrar)
+	var [] letras = palabraEncontrar.convertir palabra en arreglos
+	var [] guionesBajos = letras.longitud
+	var [] errores = letras.longitud
+	var encontrandoPalabra
+	var error = 0
+	var errorFigura = 0
+	var verificarPalabra = 0
+	var victoria = false
+
+		
+	Desde var i=0; hasta i = letras.longitud; incremento
+		guionesBajos[i] = "_"
+	finDesde
+	
+	Escribir guionesBajos
+	
+	hacer
+		Escribir "Ingrese una letra"
+		Leer(letraIngresada)
+		
+		Desde var i=0; hasta i = letras.longitud; incremento
+			Si letras[i] = letraIngresada entonces
+				guionesBajos[i] = letraIngresada
+				verificarPalabra = verificarPalabra + 1				
+			sino
+				error = error + 1
+			finSi
+		finDesde
+		Escribir (guionesBajos)
+		si verificarPalabra == letras.longitud entonces
+			victoria = true
+			Escribir "Ha ganado"
+		sino
+			victoria = false
+			si error = letras.longitud entonces
+				errorFigura = erroFigura + 1 
+				caso(errorFigura)
+					caso 1:
+						figurasAhorcados.error1()
+					caso 2: 
+						figurasAhorcados.error2()
+					caso 3: 
+						figurasAhorcados.error3()
+					caso 4: 
+						figurasAhorcados.error4()
+					caso 5:
+						figurasAhorcados.error5()
+					caso 6:
+						figurasAhorcados.error6()
+						victoria = verdadero
+						Escribir "Has perdido"
+				finCaso
+		finSi
+		Escribir "palabra: "+guionesBajos
+		error = 0	
+	mientras (victoria = false)
+	controlJuegoAhorcado
+FinProceso
+	
+InicioProceso SalirDelJuego()
+	
+FinProceso	

@@ -1,0 +1,51 @@
+Inicio Hanoi
+
+	Escribir "Bienvenido al juego de las torres de Hanoi"
+	EScribir "Puedes mover solamente un discoa la vez"
+	Escribir "Ningún disco puede estar de un disco más pequeño"
+	
+	llamar	controlHanoi()
+Fin
+
+Inicio Proceso controlHanoi()
+	var jugar
+	Escribir "Quieres jugar? 1. SI 2. NO, cualquier numero para salir de la app"
+	leer(jugar)
+	
+	si leer == 1 entonces
+		llamar inicioJuego()
+	sino si leer == 2 
+		llamar pruebaAhorcado.controlMenu()
+	sino
+		llamar pruebaAhorcado.salir()
+	finSi
+finProceso
+
+Inicio Proceso inicioJuego()
+	var cantidadDiscos
+	Escribir "De cuantos discos quieres las torres?"
+	leer(cantidadDiscos)
+	llamar crearTorre(cantidadDiscos)
+finProceso
+
+Inicio Proceso crearTorre(int cantidadDiscos)
+	var torrePrincipal[] = arreglo tamaño 10
+	var torre1[] = arreglo tamaño cantidadDiscos		
+	torrePrincipal[0] = "1"			
+	torrePrincipal[1] = "22"	
+	torrePrincipal[2] = "333"
+	torrePrincipal[3] = "4444"
+	torrePrincipal[4] = "55555"
+	torrePrincipal[5] = "666666"
+	torrePrincipal[6] = "7777777"
+	torrePrincipal[7] = "88888888"
+	torrePrincipal[8] = "999999999"
+	torrePrincipal[9] = "1111111111"
+	
+	desde var i = 0; hasta i < cantidadDiscos; incremento
+		torre1[i] = torrePrincipal [i]
+		Escribir ""+ torre[i]
+	finDesde		
+		
+finProceso
+

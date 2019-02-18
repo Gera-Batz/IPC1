@@ -1,0 +1,224 @@
+var tiroLargo1
+var tiroLargo2
+var tiroCorto1
+var tiroCorto2
+var porcentajeTiroLargo1 = 65
+var porcentajeTiroLargo2 = 65
+var porcentajeTIroCorto1 = 80
+var porcentajeTiroCorto2 = 80
+var puntos1 = 0
+var puntos2 = 0
+Inicio ControlJuegoBasquetball
+	llamar Introduccion()
+			
+Fin
+InicioProceso Introduccion()
+	Escribir "Bienvenido a Basquetball"
+	Escribir "Sera un juego por turnos, cada uno de los dos jugadores podrá hacer tiros"
+	Escribir "y también movimientos defensivos."
+	Escribir "Por turno podrán hacer dos tipos de tiro:"
+	Escribir "1) Tiro largo, se hace desde 5 metros, obtienes 3 puntos si encestas"
+	Escribir "2) Tiro corto, se hace desde 3 metros, obtienes 2 puntos si encestas"
+	Escribir "si no quieren hacer algun tipo de tiro, podrán hacer 2 tipos de movimientos defensivos:"
+	Escribir "1) Defensa cuerpo a cuerpo, reduciran la probabilidad de enceste, y la probabilidad de"
+	Escribir "hacer falta sera medianamente baja"
+	Escribir "2) Defensa fuerte, la probabilidad de enceste del contrario sera muchisimo menor, pero"
+	Escribir "la probabilidad de realizar una falta sera alta."
+	Escribir "Si hacen alguna falta, el jugador al que se la hallan hecho, tendrá"
+	Escribir "un 'tiro Libre', obtendrá 2 puntos si encesta"
+	llamar jugarDeNuevo()
+FinProceso
+InicioProceso jugarDeNuevo()
+	var jugar
+	Escribir "Quieres jugar? 1. Si 2. No, cualquier otra numero para salir de la aplicacion"
+	leer(jugar)
+	si jugar == 1 entonces
+		llamar solicitarNombres()
+	sino si jugar == 2 entonces
+		llamar menuJuegos()
+	sino
+		salir juegos
+	finSi
+finProceso
+
+InicioProceso SolicitarNombres()
+	var primerJugador
+	var segundoJugador	
+	Escribir "Necesitamos que nos indiquen los nombres de los jugadores"
+	Escribir "Ingresen el nombre del primer jugador"
+	Leer(primerJugador)
+	Escribir "Ingresen el nombre del segundo jugador"
+	Leer(segundoJugador)
+	Escribir "Primer jugador: "+primerJugador+", segundoJugador: "+segundoJugador
+	
+	llamar JuegoBasquetball(primerJugador, segundoJugador)
+FinProceso
+
+InicioProceso JuegoBasquetball(var primerJugador, var segundoJugador)
+	var turno = numero random entre 1 y 2
+	var cantidadTurnos = 0
+	const VUELTAS_TOTALES = 10
+	hacer
+		si (turno == 1) entonces
+			llamar controlTurno(primerJugador, turno, segundoJugador)
+			turno = turno + 1
+		sino
+			llamar controlTurno(primerJugador, turno, segundoJugador)
+			turno = turno - 1
+		finSi
+		cantidadTurnos = cantidadTurnos + 1
+	mientras(cantidadTurnos != VUELTAS_TOTALES)
+	Escribir ""+primerJugador+" obtuvo: "+puntos1+" puntos"
+	Escribir""+segundoJugador+" obtuvo: "+puntos2+" puntos"
+        si puntos1 > puntos2 entonces
+           	Escribir ""+primerJugador+" es el ganador"
+        sino si puntos2 > puntos1 entonces
+            Escribir ""+segundoJugador+" es el ganador"
+        sino
+            Escribir "empate"
+        finSi
+FinProceso
+Inicio controlTurno(var nombreJugador, var numeroJugador, var nombreJugador2)
+	var hacer
+	var tipoTiroDefensa
+	si numeroJugador == 1 entonces
+		Escribir"Que deseas hacer: 1. Tiro, 2. Defensa"
+		leer(hacer)
+		caso hacer 
+			caso 1:
+				Escribir "1.Tiro Largo"
+				Escribir "2.Tiro Corto"
+				leer(tipoTiroDefensa)
+				si tipoTiroDefensa == 1 entonces
+					Escribir "Tiro Largo realizado"
+					tiroLargo1 = random entre 1 a 100
+					si tiroLargo1 <= porcentajeTiroLargo1 entonces
+						Escribir "Has encestado"
+						puntos1 = puntos + 3
+					sino
+						Escibir "No has encestado"
+					finSi	 
+				sino 
+					Escribir "Tiro Corto realizado"
+					tiroCorto1 = random entre 1 a 100
+					si tiroCorto1 <= porcentajeTiroCorto1 entonces
+						Escribir "Has encestado"
+						puntos1 = puntos + 2
+					sino
+						Escribir "No has encestado"
+				finSi
+				porcentajeTiroLargo1 = 65
+				porcentajeTiroCorto2 = 80
+			caso 2: 	
+				Escribir "1. Cuerpo a Cuerpo"
+				Escribir "2. Fuerte"
+				leer(tipoTiroDefensa)
+				si tipoTiroDefensa == 1 entonces
+					Escribir "Cuerpo a cuerpo realizado"
+					porcentajeTiroLargo2 = porcentajeTiroLargo2 - 15
+					porcentajeTiroCorto2 = porcentajeTiroCorto2 - 15
+					var falta = random entre 1 a 100
+					si falta <= 35 entonces
+						Escribir "Has hecho falta, " + sugundoJugador + "tiene tiro libre"
+						Escribir ""+segundoJugador+" realiza su tiro libre"	
+						var tiroLibre = random entre 1 y 100
+						si tiroLibre <= 90 entonces
+							Escribir "Tiro libre encestado"
+							puntos2 = puntos2 + 2
+						sino
+							Escribir "Tiro libre fallado"
+						finSi
+					sino
+						Escribir "Defensa limpia"
+											
+					finSi
+					
+				sino
+					Escribir "Defensa Fuerte realizada"
+
+					var falta = random entre 1 a 100
+					si falta <= 65 entonces
+						Escribir "Has hecho falta, " + nombreJugador2 + "tiene tiro libre"
+						Escribir ""+segundoJugador+" realiza su tiro libre"
+						var tiroLibre = random entre 1 y 100
+						si tiroLibre <= 90 entonces
+							Escribir "Tiro Libre encestado"
+							puntos2 = puntos2 + 2
+					sino
+
+						Escribir "Defensa limpia"
+              				       	porcentajeTiroLargo2 = porcentajeTiroLargo2 - 30					                                                                porcentajeTiroCorto2 = porcentajeTiroCorto2 - 30 
+					finSi 
+	sino	
+		Escribir"Que deseas hacer: 1. Tiro, 2. Defensa"
+		leer(hacer)
+		caso hacer 
+			caso 1:
+				Escribir "1.Tiro Largo"
+				Escribir "2.Tiro Corto"
+				leer(tipoTiroDefensa)
+				si tipoTiroDefensa == 1 entonces
+					Escribir "Tiro Largo realizado"
+					tiroLargo2 = random entre 1 a 100
+					si tiroLargo2 <= porcentajeTiroLargo2 entonces
+						Escribir "Has encestado"
+						puntos2 = puntos + 3
+					sino
+						Escibir "No has encestado"
+					finSi	 
+				sino 
+					Escribir "Tiro Corto realizado"
+					tiroCorto2 = random entre 1 a 100
+					si tiroCorto2 <= porcentajeTiroCorto2 entonces
+						Escribir "Has encestado"
+						puntos2 = puntos + 2
+					sino
+						Escribir "No has encestado"
+				finSi
+				porcentajeTiroLargo2 = 65
+				porcentajeTiroCorto2 = 80
+			caso 2: 	
+				Escribir "1. Cuerpo a Cuerpo"
+				Escribir "2. Fuerte"
+				leer(tipoTiroDefensa)
+				si tipoTiroDefensa == 1 entonces
+					Escribir "Cuerpo a cuerpo realizado"
+					porcentajeTiroLargo2 = porcentajeTiroLargo2 - 15
+					porcentajeTiroCorto2 = porcentajeTiroCorto2 - 15
+					var falta = random entre 1 a 100
+					si falta <= 35 entonces
+						Escribir "Has hecho falta, " + sugundoJugador + "tiene tiro libre"
+						Escribir ""+segundoJugador+" realiza su tiro libre"	
+						var tiroLibre = random entre 1 y 100
+						si tiroLibre <= 90 entonces
+							Escribir "Tiro libre encestado"
+							puntos2 = puntos2 + 2
+						sino
+							Escribir "Tiro libre fallado"
+					sino
+						Escribir "Defensa limpia"
+											
+					finSi
+					
+				sino
+					Escribir "Defensa Fuerte realizada"
+					porcentajeTiroLargo2 = porcentajeTiroLargo2 - 30
+					porcentajeTiroCorto2 = porcentajeTiroCorto2 - 30
+					var falta = random entre 1 a 100
+					si falta <= 65 entonces
+						Escribir "Has hecho falta, " + primerJugador + "tiene tiro libre"
+						Escribir ""+primerJugador+" realiza su tiro libre"
+						var tiroLibre = random entre 1 y 100
+						si tiroLibre <= 90 entonces
+							Escribir "Tiro Libre encestado"
+							puntos1 = puntos1 + 2
+					sino
+						Escribir "Defensa limpia"
+						 
+				finSi 	
+	finSi
+	
+FinProceso
+
+
+

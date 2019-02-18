@@ -1,0 +1,106 @@
+Inicio JuegoCartas
+	var empezarJuego
+	Escribir "Bienvenido al Casino 'IPC'"
+	llamar juegoNuevo()
+	
+Fin 
+
+Inicio Proceso instrucciones()
+	Escribir "Instrucciones:"
+	Escribir "Antes de empezar a jugar, tienes que apostar"
+	Escribir "Tú indicas cuanto traes de efectivo"
+	Escribir "El casino estara dando cartas al azar, y"
+	Escribir "si la carta por la que tu apuestas, esta"
+	Escribir "en el rango de las que salieron anteriormente, tu ganas"
+	Escribir "la cantidad que apostaste"
+	Escribir "El juego termina hasta que te quedes sin dinero"
+	Escribir "Buena Suerte"	
+	llamar juegoNuevo()
+FinProceso
+
+InicioProceso controlJuego()
+	var efectivo
+	var primerCarta
+	var segundaCarta
+	var tercerCarta
+	var apuesta
+	var apuestaCorrecta = false
+	Escribir "Con cuanto efectivo empezaras a jugar"
+	leer(efectivo)
+	mientras(efectivo > 0){
+		Escribir "Efectivo actual: "+efectivo
+		hacer
+			primerCarta = random de 1 a 11
+			segundaCarta = random de primer carta a 13
+		hasta(primerCarta > segundaCarta)
+		tercerCarta = random de 1 a 13	
+		Escribir "Las cartas son:"
+		Escribir "Primer Carta: "+primerCarta+" Segunda Carta: "+segundaCarta
+		hacer
+	 		Escribir "Cuanto apostaras?"
+			leer(apuesta)
+			si (apuesta > efectivo) entonces
+				Escribir "vuelve a intentarlo"
+				apuestaCorrecta = false
+			sino
+				apuestaCorrecta = true
+			finSi
+		mientras (apuestaCorrecta != true)
+		Escribir "Apostaste: "+apuesta
+		Escribir "La carta es: "+tercerCarta
+		if (tercerCarta >= primerCarta && tercerCarta <= segundaCarta) entonces
+			Escribir "Has ganado"
+			efectivo = efectivo + apuesta
+		sino
+			efectivo = efectivo - apuesta
+			Escribir "Has apostado mal"
+		finSi
+	}
+	Escribir "Buena Suerte en la próxima"
+	llamar juegoNuevo()
+FinProceso
+InicioProceso juegoNuevo
+	var jugarDeNuevo
+	Escribir "Quieres jugar?"
+	Escribir "1. si 2. no 3. Instrucciones"
+	leer(jugarDeNuevo)
+	caso 
+		caso 1
+			llamar controlJuego()
+		caso 2
+			llamar instrucciones()
+		caso 3
+			Escribir "Gracias por visitarnos"
+			llamar menuInicio()
+	finSi
+finProceso
+Inicio tipoDeCarta (var carta)
+	caso(carta)
+		caso 1
+			retornar "A"
+		caso 2
+			retornar "2"
+		caso 3 
+			retornar "3"
+		caso 4 
+			retornar "4"
+		caso 5 
+			retornar "5"
+		caso 6 
+			retornar "6"
+		caso 7 
+			retornar "7"
+		caso 8 
+			retonrar "8"
+		caso 9 	
+			retornar "9"
+		caso 10 
+			retornar "10"
+		caso 11
+			retornar "J"
+		caso 12
+			retornar "Q"
+		caso 13 
+			retornar "K"
+fin 
+
